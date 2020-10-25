@@ -13,7 +13,7 @@
   "homepage": "https://github.com/sososoyoung/vue3-reactive-store#readme",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -d",
     "test": "jest"
   },
   "peerDependencies": {
