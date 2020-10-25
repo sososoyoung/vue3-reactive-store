@@ -1,14 +1,19 @@
 {
   "name": "vue3-reactive-store",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "index.js",
   "author": "Jason <shty1990@163.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/sososoyoung/vue3-reactive-store.git"
   },
+  "bugs": {
+    "url": "https://github.com/sososoyoung/vue3-reactive-store/issues"
+  },
+  "homepage": "https://github.com/sososoyoung/vue3-reactive-store#readme",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "peerDependencies": {
