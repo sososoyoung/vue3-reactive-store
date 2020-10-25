@@ -1,62 +1,73 @@
 # vue3-reactive-store
+一个轻巧的状态共享库, 基于vue3 reactive 创建
 
-## Installation
-```sh
-npm install vue3-reactive-store
-```
+## 解决的问题:
+一种轻量,简单的方式实现全局共享, 支持 ts 类型推断
 
-## How to use
-1. use store
-```ts
-// main.ts
-import { createApp } from 'vue';
-import App from './App';
-import store from './store';
+## 特性
+- 暂时不支持时间旅行
+- 轻巧, 可创建多实例
+- 不需要多实例时, 提供相应的辅助函数: `useModule`, `useStore`, 简化代码
+- 与 vuex 不冲突, 奢简由人
 
-createApp(App).use(store).mount('#app');
-```
+## 安装
+`npm install vue3-reactive-store`
 
-```ts
-// store.ts
-import { createStore } from 'vue3-reactive-store';
-const store = createStore();
+## 开始使用
+1. 全局安装
+    ```ts
+    // main.ts
+    import { createApp } from 'vue';
+    import App from './App';
+    import store from './store';
 
-export default store;
-```
-2. create hook
-```ts
-// hook.ts
-import { reactive } from 'vue';
-import { exportModule, createStore, useModule } from 'vue3-reactive-store';
+    createApp(App).use(store).mount('#app');
+    ```
 
-const testHook = () => {
-  const state = reactive({ num: 0 })
+    ```ts
+    // store.ts
+    import { createStore } from 'vue3-reactive-store';
+    const store = createStore();
 
-  const add = () => {
-    state.num++;
-  }
+    export default store;
+    ```
+2. 创建 reactive hook
+    ```ts
+    // hook.ts
+    import { reactive } from 'vue';
+    import { exportGlobalModule } from 'vue3-reactive-store';
 
-  return {
-    state, add
-  }
-}
+    const testHook = () => {
+      const state = reactive({ num: 0 })
 
-export type HookFnType = typeof testHook;
-export default exportModule<HookFnType>(testHook)
-```
+      const add = () => {
+        state.num++;
+      }
 
-3. inject hook
-```ts
-
-import store from '../your-store-path/store';
-
-export default defineComponent({
-  name: 'TestHook',
-  setup() {
-    const { state, add } = store.injectModule<HookFnType>(hookModule);
-    return {
-      testState:state, add
+      return {
+        state, add
+      }
     }
-  },
-});
-```
+
+    export type HookFnType = typeof testHook;
+    export default exportGlobalModule<HookFnType>(testHook)
+    ```
+3. 导入 reactive hook
+    ```ts
+    import { useModule, useStore } from 'vue3-reactive-store';
+
+    export default defineComponent({
+      name: 'TestHook',
+      setup(props) {
+        const { state, add } = useModule<HookFnType>(hookModule);
+
+        // 或者希望使用 store 时, 可以借助 `useStore`
+        // const store = useStore()
+        // const { state, add } = store.injectModule<HookFnType>(hookModule);
+
+        return {
+          state, add
+        }
+      },
+    });
+    ```
