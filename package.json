@@ -1,0 +1,30 @@
+{
+  "name": "vue3-reactive-store",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Jason <shty1990@163.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sososoyoung/vue3-reactive-store.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@types/jest": "^26.0.15",
+    "babel-jest": "^26.6.1",
+    "jest": "^26.6.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^3.9.0"
+  }
+}
