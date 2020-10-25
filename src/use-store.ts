@@ -6,12 +6,14 @@ export const storeKey = 'reactive-store'
 
 
 export function useStore(key: string = storeKey) {
-  return inject<Store>(key);
+  const store = inject<Store>(key);
+  if (!store) {
+    throw new Error("You must use store at first!");
+  }
+
+  return store;
 }
 
 export function useModule<T extends ModuleUseFn>(m: Module<T>, _storeKey?: string) {
-  const store = useStore(_storeKey)
-  if (store) {
-    return store.injectModule(m);
-  }
+  return useStore(_storeKey).injectModule(m);
 }
