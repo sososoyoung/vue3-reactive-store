@@ -1,6 +1,6 @@
 {
   "name": "vue3-reactive-store",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "files": [
     "dist"

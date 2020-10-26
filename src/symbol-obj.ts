@@ -10,7 +10,7 @@ export default class SymbolObj {
   }
 
   has(k: symbol) {
-    return k in this.data
+    return this.data.has(k);
   }
 
   del(k: symbol) {
