@@ -1,8 +1,8 @@
 import { reactive } from 'vue';
 import { exportModule, createStore, useModule } from '../src';
 
-const testHook = () => {
-  const state = reactive({ num: 0 })
+const testHook = (initValue = 0) => {
+  const state = reactive({ num: initValue })
 
   const add = () => {
     state.num++;
@@ -19,8 +19,8 @@ const hookModule = exportModule<HookFnType>(testHook)
 const store = createStore()
 
 test('test injected module', () => {
-  const { state, add } = store.injectModule<HookFnType>(hookModule);
-  expect(state.num).toBe(0);
+  const { state, add } = store.injectModule<HookFnType, number>(hookModule, 10);
+  expect(state.num).toBe(10);
   add()
-  expect(state.num).toBe(1);
+  expect(state.num).toBe(11);
 });

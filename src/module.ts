@@ -1,4 +1,4 @@
-export type ModuleUseFn = (...args: any[]) => any
+export type ModuleUseFn = (args: any) => any
 
 export interface Module<Fn> {
   __key: symbol;

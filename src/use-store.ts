@@ -14,6 +14,6 @@ export function useStore(key: string = storeKey) {
   return store;
 }
 
-export function useModule<T extends ModuleUseFn>(m: Module<T>, _storeKey?: string) {
-  return useStore(_storeKey).injectModule(m);
+export function useModule<T extends ModuleUseFn, Args extends any>(m: Module<T>, args?: Args, _storeKey?: string) {
+  return useStore(_storeKey).injectModule<T, Args>(m, args);
 }

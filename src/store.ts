@@ -41,14 +41,14 @@ export class Store {
     return this._modules.has(key)
   }
 
-  private initGlobalModule<T extends ModuleUseFn>(key: symbol, m: Module<T>): ReturnType<T> {
-    const instance = m.use();
+  private initGlobalModule<T extends ModuleUseFn, Args>(key: symbol, m: Module<T>, args?: Args): ReturnType<T> {
+    const instance = m.use(args);
     this._globalModules.set(key, instance)
 
     return instance;
   }
 
-  registerModule(m: Module<ModuleUseFn>) {
+  registerModule(m: Module<ModuleUseFn>, args?: any) {
     const key = m.__key
     if (!key) {
       throw new Error("The name of the module is required!");
@@ -61,7 +61,7 @@ export class Store {
     this._modules.set(key, m)
 
     if (!this.options.lazy && m.__isGlobal) {
-      this.initGlobalModule(key, m);
+      this.initGlobalModule(key, m, args);
     }
   }
 
@@ -69,17 +69,17 @@ export class Store {
     this._modules.del(key)
   }
 
-  injectModule<T extends ModuleUseFn>(m: Module<T>): ReturnType<T> {
+  injectModule<T extends ModuleUseFn, Args extends any>(m: Module<T>, args?: Args): ReturnType<T> {
     const key = m.__key;
     if (m.__isGlobal && this._globalModules.has(key)) {
       return this._globalModules.get<ReturnType<T>>(key);
     }
 
     if (m.__isGlobal) {
-      return this.initGlobalModule<T>(key, m);
+      return this.initGlobalModule<T, Args>(key, m, args);
     }
 
-    return m.use();
+    return m.use(args);
 
   }
 }

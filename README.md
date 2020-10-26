@@ -37,8 +37,8 @@
     import { reactive } from 'vue';
     import { exportGlobalModule } from 'vue3-reactive-store';
 
-    const testHook = () => {
-      const state = reactive({ num: 0 })
+    const testHook = (iniNum = 0) => {
+      const state = reactive({ num: iniNum })
 
       const add = () => {
         state.num++;
@@ -59,7 +59,7 @@
     export default defineComponent({
       name: 'TestHook',
       setup(props) {
-        const { state, add } = useModule<HookFnType>(hookModule);
+        const { state, add } = useModule<HookFnType, number>(hookModule, 10);
 
         // 或者希望使用 store 时, 可以借助 `useStore`
         // const store = useStore()
