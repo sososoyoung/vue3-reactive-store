@@ -1,4 +1,6 @@
 # vue3-reactive-store
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) [![npm version](https://img.shields.io/npm/v/vue3-reactive-store.svg?style=flat)](https://www.npmjs.com/package/vue3-reactive-store)
+
 一个轻巧的状态共享库, 基于vue3 reactive 创建
 
 ## 解决的问题:
